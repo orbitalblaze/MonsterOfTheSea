@@ -32,18 +32,23 @@ public class HexGrid : MonoBehaviour {
 	
     void CreateCell (int x, int y, int i) {
         Vector3 position;
-        position.x = (x + y * 0.5f - y / 2) * (HexMetrics.innerRadius * 2f);
-        position.y = y * (HexMetrics.outerRadius * 1.5f);;
+        //y*0.5 est le décalage pour aligner les centres avec les arêtes des lignes inférieures.
+        //Le y / 2 sert à enlever l'unité du résultat de y*0.5 pour permettre que sur les lignes impaires,
+        //il y ait un décalage de la moitié du double du rayon interne
+        position.x = (x + y * 0.5f - y / 2) * (HexMetrics.innerRadius * 2f) /*Décalage entre les centres pour les colonnes*/;
+        position.y = y * (HexMetrics.outerRadius * 1.5f) /*Décalage entre les centres pour les lignes*/;
         position.z = 0f;
 
+        //On instancie un prefab de cellule à l'endroit calculé, en lui désactivant son postionnement vis à vis du parent.
         HexCell cell = cells[i] = Instantiate<HexCell>(cellPrefab);
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
 
+        //On instancie du texte pour labeliser les cellules. On place
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition =
-            new Vector2(position.x, position.z);
+            new Vector2(position.x, position.y);
         label.text = x.ToString() + "\n" + y.ToString();
     }
 

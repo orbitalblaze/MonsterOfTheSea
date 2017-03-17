@@ -19,6 +19,9 @@ public class HexGrid : MonoBehaviour {
 
     public HexMesh hexMesh;
 
+    public Color defaultColor = Color.white;
+    public Color touchedColor = Color.magenta;
+
     void Awake () {
         //On récupère le mesh des cases
         hexMesh = GetComponentInChildren<HexMesh>();
@@ -52,9 +55,13 @@ public class HexGrid : MonoBehaviour {
         }
     }
 
-    void TouchCell (Vector3 position) {
+    public void TouchCell (Vector3 position) {
         position = transform.InverseTransformPoint(position);
-        Debug.Log("touched at " + position);
+        HexCoordinates coordinates = HexCoordinates.FromPosition(position);
+        int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+        HexCell cell = cells[index];
+        cell.color = touchedColor;
+        hexMesh.Triangulate(cells);
     }
 	
     void CreateCell (int x, int y, int i) {
@@ -71,6 +78,7 @@ public class HexGrid : MonoBehaviour {
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, y);
+        cell.color = defaultColor;
 
         //On instancie du texte pour labeliser les cellules. On place
         Text label = Instantiate<Text>(cellLabelPrefab);

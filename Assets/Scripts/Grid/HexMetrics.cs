@@ -13,18 +13,18 @@ public static class HexMetrics
     //Schéma : https://drive.google.com/open?id=0B63W_aPVMvgqQlZnQzJ3QkQ3MlU
     public static Vector3[] corners = {
         //A1. Sommet pointant vers le haut.
-        new Vector3(0f, outerRadius, 0f),
+        new Vector3(-outerRadius, 0f, 0f),
         //A2
-        new Vector3(innerRadius, 0.5f * outerRadius, 0f ),
+        new Vector3(-0.5f * outerRadius, innerRadius, 0f ),
         //A3
-        new Vector3(innerRadius, -0.5f * outerRadius, 0f ),
+        new Vector3(0.5f * outerRadius, innerRadius, 0f ),
         //A4
-        new Vector3(0f, -outerRadius, 0f ),
+        new Vector3(outerRadius, 0f, 0f ),
         //A5
-        new Vector3(-innerRadius, -0.5f * outerRadius, 0f ),
+        new Vector3(0.5f * outerRadius, -innerRadius, 0f ),
         //A6
-        new Vector3(-innerRadius, 0.5f * outerRadius, 0f),
+        new Vector3(-0.5f * outerRadius, -innerRadius, 0f),
         //On duplique le premier sommet
-        new Vector3(0f, outerRadius, 0f)
+        new Vector3(-outerRadius, 0f, 0f)
     };
 }

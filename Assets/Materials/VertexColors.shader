@@ -4,6 +4,8 @@
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
+		_OutlineColor ("Outline Color", Color) = (255,255,255,255)
+        _Outline ("Outline width", Range (0, 0.1)) = .005
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }

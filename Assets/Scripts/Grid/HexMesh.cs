@@ -24,7 +24,7 @@ public class HexMesh : MonoBehaviour {
 		triangles = new List<int>();
 	}
 
-    //Trianguliser un ensemble de cellules
+    //Trianguler un ensemble de cellules
     public void Triangulate (HexCell[] cells) {
         //On nettoie les potentiels anciennes triangulations
         hexMesh.Clear();

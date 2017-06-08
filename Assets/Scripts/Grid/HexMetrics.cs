@@ -19,11 +19,11 @@ public static class HexMetrics
         //A3
         new Vector3(0.5f * outerRadius, innerRadius, 0f ),
         //A4
-        new Vector3(outerRadius,0f, 0f ),
+        new Vector3(outerRadius, 0f, 0f ),
         //A5
-        new Vector3(0.5f * outerRadius,-innerRadius, 0f ),
+        new Vector3(0.5f * outerRadius, -innerRadius, 0f ),
         //A6
-        new Vector3(-0.5f * outerRadius,-innerRadius, 0f),
+        new Vector3(-0.5f * outerRadius, -innerRadius, 0f),
         //On duplique le premier sommet
         new Vector3(-outerRadius, 0f, 0f)
     };

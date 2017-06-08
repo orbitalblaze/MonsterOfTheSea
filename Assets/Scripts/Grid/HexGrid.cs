@@ -28,17 +28,17 @@ public class HexGrid : MonoBehaviour {
 		//On récupère le canvas
         gridCanvas = GetComponentInChildren<Canvas>();
 		//On initialise l'array contenant les cases en fonction de la hauteur et de la largeur
-        cells = new HexCell[height * width];
+        cells = new HexCell[width * height];
 		//On instantie les cases du plateau
-        for (int y = 0, i = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = 0, i = 0; y < width; y++) {
+            for (int x = 0; x < height; x++) {
                 CreateCell(x, y, i++);
             }
         }
     }
 
     void Start () {
-        hexMesh.Triangulate(cells);
+        //hexMesh.Triangulate(cells);
     }
 
     void Update () {
@@ -69,8 +69,8 @@ public class HexGrid : MonoBehaviour {
         //y*0.5 est le décalage pour aligner les centres avec les arêtes des lignes inférieures.
         //Le y / 2 sert à enlever l'unité du résultat de y*0.5 pour permettre que sur les lignes impaires,
         //il y ait un décalage de la moitié du double du rayon interne
-        position.x = (x + y * 0.5f - y / 2) * (HexMetrics.innerRadius * 2f) /*Décalage entre les centres pour les colonnes*/;
-        position.y = y * (HexMetrics.outerRadius * 1.5f) /*Décalage entre les centres pour les lignes*/;
+        position.y = (x + y * 0.5f - y / 2) * (HexMetrics.innerRadius * 2f) /*Décalage entre les centres pour les colonnes*/;
+        position.x     = y * (HexMetrics.outerRadius * 1.5f) /*Décalage entre les centres pour les lignes*/;
         position.z = 0f;
 
         //On instancie un prefab de cellule à l'endroit calculé, en lui désactivant son postionnement vis à vis du parent.

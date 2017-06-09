@@ -38,7 +38,7 @@ public class HexGrid : MonoBehaviour {
     }
 
     void Start () {
-        //hexMesh.Triangulate(cells);
+        hexMesh.Triangulate(cells);
     }
 
     void Update () {
@@ -52,16 +52,20 @@ public class HexGrid : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(inputRay, out hit)) {
             TouchCell(hit.point);
+            
         }
     }
 
     public void TouchCell (Vector3 position) {
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
-        int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+        print("click at " + coordinates.ToString());
+        int index = coordinates.Z * height + coordinates.X;
         HexCell cell = cells[index];
         cell.color = touchedColor;
         hexMesh.Triangulate(cells);
+        print(coordinates.ToString() + index);
+        
     }
 	
     void CreateCell (int x, int y, int i) {

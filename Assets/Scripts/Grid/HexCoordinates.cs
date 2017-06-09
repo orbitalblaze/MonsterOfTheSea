@@ -11,6 +11,12 @@ public struct HexCoordinates {
             return x;
         }
     }
+    
+    public int Y {
+        get {
+            return -X - Z;
+        }
+    }
 
     public int Z {
         get {
@@ -27,11 +33,7 @@ public struct HexCoordinates {
         return new HexCoordinates(x - z / 2, z);
     }
 
-    public int Y {
-        get {
-            return -X - Z;
-        }
-    }
+    
 
     public override string ToString () {
         return "(" +
@@ -42,7 +44,9 @@ public struct HexCoordinates {
         return X.ToString() + "\n" + Y.ToString() + "\n" + Z.ToString();
     }
 
-    public static HexCoordinates FromPosition (Vector3 position) {
+    public static HexCoordinates FromPosition (Vector3 position)
+    {
+       
         float x = position.x / (HexMetrics.innerRadius * 2f);
         float z = -x;
         float offset = position.y / (HexMetrics.outerRadius * 3f);

@@ -17,20 +17,46 @@ public struct HexCoordinates {
             return z;
         }
     }
+    
+    public int Y {
+        get {
+            return -X - Z;
+        }
+    }
 
     public HexCoordinates (int x, int z) {
         this.x = x;
         this.z = z;
     }
+    
+    public static HexCoordinates FromPosition (Vector3 position) {
+        //Nombre de colonne sur la distance origine - x
+        float x = position.x / (HexMetrics.outerRadius * 1.5f);
+        float y = -x;
+        float offset = position.z / (HexMetrics.outerRadius * 3f);
+        x -= offset;
+        y -= offset;
+        int iX = Mathf.RoundToInt(x);
+        int iY = Mathf.RoundToInt(y);
+        int iZ = Mathf.RoundToInt(-x -y);
+        if (iX + iY + iZ != 0) {
+            float dX = Mathf.Abs(x - iX);
+            float dY = Mathf.Abs(y - iY);
+            float dZ = Mathf.Abs(-x -y - iZ);
 
-    public static HexCoordinates FromOffsetCoordinates (int x, int z) {
-        return new HexCoordinates(x - z / 2, z);
+            if (dX > dY && dX > dZ) {
+                iX = -iY - iZ;
+            }
+            else if (dZ > dY) {
+                iZ = -iX - iY;
+            }
+        }
+
+        return new HexCoordinates(iX, iZ);
     }
 
-    public int Y {
-        get {
-            return -X - Z;
-        }
+    public static HexCoordinates FromOffsetCoordinates (int x, int y) {
+        return new HexCoordinates(x, y - x / 2);
     }
 
     public override string ToString () {
@@ -40,33 +66,6 @@ public struct HexCoordinates {
 
     public string ToStringOnSeparateLines () {
         return X.ToString() + "\n" + Y.ToString() + "\n" + Z.ToString();
-    }
-
-    public static HexCoordinates FromPosition (Vector3 position) {
-        float x = position.x / (HexMetrics.innerRadius * 2f);
-        float z = -x;
-        float offset = position.y / (HexMetrics.outerRadius * 3f);
-        x -= offset;
-        z -= offset;
-        int iX = Mathf.RoundToInt(x);
-        int iZ = Mathf.RoundToInt(z);
-        int iY = Mathf.RoundToInt(-x -z);
-        if (iX + iZ + iY != 0)
-        {
-            float dX = Mathf.Abs(x - iX);
-            float dY = Mathf.Abs(z - iZ);
-            float dZ = Mathf.Abs(-x - z - iY);
-
-            if (dX > dY && dX > dZ)
-            {
-                iX = -iZ - iY;
-            }
-            else if (dY > dZ)
-            {
-                iZ = -iX - iZ;
-            }
-        }
-        return new HexCoordinates(iX, iY);
     }
 
 }

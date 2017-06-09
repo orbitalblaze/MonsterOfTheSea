@@ -29,9 +29,15 @@ public struct HexCoordinates {
         this.z = z;
     }
     
-    public static HexCoordinates FromPosition (Vector3 position) {
+    public static HexCoordinates FromPosition (Vector3 position)
+    {
+
+        float x = position.x / (1.5f * HexMetrics.outerRadius);
+        float z = position.y / (2f * HexMetrics.innerRadius);
+        
+        Debug.Log("FromPosition(" + x +","+ z +")");
         //Nombre de colonne sur la distance origine - x
-        float x = position.x / (HexMetrics.outerRadius * 1.5f);
+        /*float x = position.x / (HexMetrics.outerRadius * 1.5f);
         float y = -x;
         float offset = position.z / (HexMetrics.outerRadius * 3f);
         x -= offset;
@@ -50,9 +56,9 @@ public struct HexCoordinates {
             else if (dZ > dY) {
                 iZ = -iX - iY;
             }
-        }
+        }*/
 
-        return new HexCoordinates(iX, iZ);
+        return new HexCoordinates(/*iX, iZ*/);
     }
 
     public static HexCoordinates FromOffsetCoordinates (int x, int y) {

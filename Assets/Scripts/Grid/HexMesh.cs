@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/////////////////////////
+/// GRèVE GÉNÉRALE  /////
+/////////////////////////
+
+using UnityEngine;
 using System.Collections.Generic;
 using Grid;
 
@@ -6,7 +10,7 @@ using Grid;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class HexMesh : MonoBehaviour {
     //Le mesh d'affichage
-	Mesh hexMesh;
+	public Mesh hexMesh;
     //Liste des arêtes
 	List<Vector3> vertices;
     //Liste des triangles
@@ -23,13 +27,21 @@ public class HexMesh : MonoBehaviour {
 		triangles = new List<int>();
 	}
 
+	void Start()
+	{
+		Triangulate();
+	}
     
 
     //Triangulise une cellule
 	public void Triangulate () {
+		hexMesh.Clear();
+		vertices.Clear();
+		triangles.Clear();
 	    
     //On considère la position de la cellule comme son centre.
         Vector3 center = transform.parent.localPosition;
+		
         //On créer les faces triangulaires en utilisants le sommet et en décalant les coins de l'hexagone
         for (int i = 0; i < 6; i++) {
             AddTriangle(
@@ -38,7 +50,11 @@ public class HexMesh : MonoBehaviour {
                 center + HexMetrics.corners[i + 1]
             );
         }
-    }
+
+		hexMesh.vertices = vertices.ToArray();
+		hexMesh.triangles = triangles.ToArray();
+		hexMesh.RecalculateNormals();
+	}
 
     
     //Forme un triangle à partir de 3 points

@@ -32,8 +32,8 @@ namespace Grid
             Cell createdCell = Instantiate<Cell>(cellPrefab);
             
             Vector3 cellPos = new Vector3();
-            cellPos.x = x * 1.5f * HexMetrics.outerRadius;
-            cellPos.y =  ((y % 10) * 2 * HexMetrics.innerRadius) + (x % 2 ) * HexMetrics.innerRadius;
+            cellPos.x = x * (1.5f * HexMetrics.outerRadius);
+            cellPos.y =  ((y % 10) * (2 * HexMetrics.innerRadius)) + (x % 2) * HexMetrics.innerRadius;
             cellPos.z = 0f;
             createdCell.transform.SetParent(transform, false);
             createdCell.transform.localPosition = cellPos;

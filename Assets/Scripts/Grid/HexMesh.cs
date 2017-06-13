@@ -40,7 +40,7 @@ public class HexMesh : MonoBehaviour {
 		triangles.Clear();
 	    
     //On considère la position de la cellule comme son centre.
-        Vector3 center = transform.parent.localPosition;
+		Vector3 center = new Vector3(0f,0f,0f);
 		
         //On créer les faces triangulaires en utilisants le sommet et en décalant les coins de l'hexagone
         for (int i = 0; i < 6; i++) {

@@ -15,12 +15,10 @@ public class HexMesh : MonoBehaviour {
 	List<Vector3> vertices;
     //Liste des triangles
 	List<int> triangles;
-    MeshCollider meshCollider;
 
 	void Awake () {
 	    //On récupère le composant MeshFilter auquel on lui attribue notre mesh que l'on instancie et que l'on nomme Hex Mesh.
 		GetComponent<MeshFilter>().mesh = hexMesh = new Mesh();
-	    meshCollider = gameObject.AddComponent<MeshCollider>();
 		hexMesh.name = "Hex Mesh";
 
 		vertices = new List<Vector3>();
@@ -70,4 +68,9 @@ public class HexMesh : MonoBehaviour {
         triangles.Add(vertexIndex + 1);
         triangles.Add(vertexIndex + 2);
     }
+
+	private void OnMouseDown()
+	{
+		transform.parent.GetComponent<Cell>().userClick();
+	}
 }

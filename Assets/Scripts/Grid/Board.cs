@@ -37,6 +37,9 @@ namespace Grid
             cellPos.z = 0f;
             createdCell.transform.SetParent(transform, false);
             createdCell.transform.localPosition = cellPos;
+            
+            createdCell.position.x = x;
+            createdCell.position.y = y;
             return createdCell;
         }
 

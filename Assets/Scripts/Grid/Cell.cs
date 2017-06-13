@@ -5,5 +5,15 @@ namespace Grid
     {
         public GridPosition position;
 
+        private void Awake()
+        {
+            position = new GridPosition();
+        }
+
+        public void userClick()
+        {
+            print(position.x + ", " + position.y);
+        }
+
     }
 }

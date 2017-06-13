@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 namespace Grid
 {
@@ -8,6 +10,8 @@ namespace Grid
         public int height = 10;
 
         public Cell cellPrefab;
+        
+        private List<Cell> clickedCells = new List<Cell>();
 
         void Awake()
         {
@@ -22,9 +26,15 @@ namespace Grid
             }
         }
         
-        void Start()
+        void Update()
         {
             
+            print(clickedCells.Count);
+            if (clickedCells.Count == 2)
+            {
+                clickedCells[0].getToken().move(clickedCells[1]);
+                clickedCells = new List<Cell>();
+            }
         }
 
         private Cell createCell(int x, int y)
@@ -43,10 +53,24 @@ namespace Grid
             return createdCell;
         }
 
-        public void onClick(int x, int y)
+        public Cell getCellByCoords(int x, int y)
         {
-            
+            return cells[x, y];
         }
-       
-     }
+
+        public void newSelectedCell(Cell clickedCell)
+        {
+            if (clickedCells.Count == 0)
+            {
+                if (clickedCell.hasToken())
+                {
+                    clickedCells.Add(clickedCell);
+                }
+            } 
+            else if (clickedCells.Count == 1)
+            {
+                clickedCells.Add(clickedCell);
+            }
+        }
+    }
 }

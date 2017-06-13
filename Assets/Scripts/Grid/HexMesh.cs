@@ -68,7 +68,7 @@ public class HexMesh : MonoBehaviour {
         triangles.Add(vertexIndex + 1);
         triangles.Add(vertexIndex + 2);
     }
-
+  
 	private void OnMouseDown()
 	{
 		transform.parent.GetComponent<Cell>().userClick();

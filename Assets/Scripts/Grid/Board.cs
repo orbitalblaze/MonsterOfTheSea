@@ -12,6 +12,8 @@ namespace Grid
         public Cell cellPrefab;
         
         private List<Cell> clickedCells = new List<Cell>();
+        
+        
 
         void Awake()
         {
@@ -21,7 +23,6 @@ namespace Grid
                 for (int y = 0; y < height; y++)
                 {
                     cells[x,y] = createCell(x, y);
-                    
                 }
             }
         }
@@ -30,10 +31,29 @@ namespace Grid
         {
             
             print(clickedCells.Count);
-            if (clickedCells.Count == 2)
+            if ((clickedCells.Count) == 2)
             {
-                clickedCells[0].getToken().move(clickedCells[1]);
+                List<Cell> neighbors = clickedCells[0].getNeighbors();
+                foreach(Cell cell in neighbors)
+                {
+                    cell.GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.white);
+                }
+                
+                
+                if (clickedCells[0].isNeighbor(clickedCells[1].position))
+                {
+                    clickedCells[0].getToken().move(clickedCells[1]);
+                }
                 clickedCells = new List<Cell>();
+               
+            }
+            if ((clickedCells.Count) == 1)
+            {
+                List<Cell> neighbors = clickedCells[0].getNeighbors();
+                foreach(Cell cell in neighbors)
+                {
+                    cell.GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.red);
+                }
             }
         }
 
@@ -55,9 +75,16 @@ namespace Grid
 
         public Cell getCellByCoords(int x, int y)
         {
-            return cells[x, y];
+            if (!((x < 0 || x > width) || (y < 0 || y > height)))
+            {
+                return cells[x, y];
+            }
+            else
+            {
+                return null;
+            }
         }
-
+        
         public void newSelectedCell(Cell clickedCell)
         {
             if (clickedCells.Count == 0)

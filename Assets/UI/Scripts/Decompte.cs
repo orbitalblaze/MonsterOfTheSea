@@ -4,18 +4,18 @@ using System.Collections;
 
 public class Decompte : MonoBehaviour
 {
+	//temps d'un tour de jeu
     float timeLeft = 30.0f;
 
     public Text text;
     
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        text.text = "Temps restant : " + Mathf.Round(timeLeft) + "sec";
+        timeLeft -= Time.deltaTime; //decompte, temps qui descend sec par sec
+        text.text = Mathf.Round(timeLeft) + "";
         if (timeLeft < 0)
         {
-            //Application.LoadLevel("gameOver");
-            text.text = "Fin du tour";
+            text.text = "0";
         }
     }
 }

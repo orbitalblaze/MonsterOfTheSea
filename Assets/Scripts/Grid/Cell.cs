@@ -1,53 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Grid
 {
     public class Cell : MonoBehaviour
     {
         public GridPosition position;
-        
-        
-        public bool isNeighbor(GridPosition clickedCellPos)
+
+
+        public bool isNeighbor(Cell clickedCell)
         {
-            if (position.x % 2 == 0)
+            List<Cell> neighbors = this.getNeighbors();
+            foreach (Cell cell in neighbors)
             {
-                Vector2[] evenDir = new Vector2[6];
-                evenDir[0] = new Vector2(0f, -1f);
-                evenDir[1] = new Vector2(1f, 0f);
-                evenDir[2] = new Vector2(1f, -1f);
-                evenDir[3] = new Vector2(0f, 1f);
-                evenDir[4] = new Vector2(-1f, -1f);
-                evenDir[5] = new Vector2(-1f, 0f);
-                for (int i = 0; i < 6; i++)
+                if (clickedCell.Equals(cell))
                 {
-                    print(position.x + " |||X||| " + (clickedCellPos.x + evenDir[i].x));
-                    print(position.y + " |||Y||| " + (clickedCellPos.y + evenDir[i].y));
-                   
-                    if((clickedCellPos.x == (position.x + evenDir[i].x)) && (clickedCellPos.y == (position.y + evenDir[i].y)))
-                    {
-                        return true;
-                    } 
+                    return true;
                 }
-                return false;
+                
             }
-            else
-            {
-                Vector2[] oddDir = new Vector2[6];
-                oddDir[0] = new Vector2(0f, -1f);
-                oddDir[1] = new Vector2(1f, 1f);
-                oddDir[2] = new Vector2(1f, 0f);
-                oddDir[3] = new Vector2(0f, 1f);
-                oddDir[4] = new Vector2(-1f, 0f);
-                oddDir[5] = new Vector2(-1f, 1f);
-                for (int i = 0; i < 6; i++)
-                {
-                    if((clickedCellPos.x == (position.x + oddDir[i].x)) && (clickedCellPos.y == (position.y + oddDir[i].y)))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
+            return false;
         }
 
         private void Awake()
@@ -82,9 +54,9 @@ namespace Grid
         {
             List<Cell> neighbors = new List<Cell>();
 
-           
+
             Vector2[] neighborsDirections = new Vector2[6];
-            
+
             if (position.x % 2 == 0)
             {
                 neighborsDirections[0] = new Vector2(0f, -1f);
@@ -93,7 +65,6 @@ namespace Grid
                 neighborsDirections[3] = new Vector2(0f, 1f);
                 neighborsDirections[4] = new Vector2(-1f, -1f);
                 neighborsDirections[5] = new Vector2(-1f, 0f);
-               
             }
             else
             {
@@ -103,22 +74,18 @@ namespace Grid
                 neighborsDirections[3] = new Vector2(0f, 1f);
                 neighborsDirections[4] = new Vector2(-1f, 0f);
                 neighborsDirections[5] = new Vector2(-1f, 1f);
-               
             }
             for (int i = 0; i < 6; i++)
             {
                 GridPosition neighborPos = new GridPosition();
                 int x = (int) (position.x + neighborsDirections[i].x);
-                int y = (int) (position.y + neighborsDirections[i].y);
+                int y = (int) ((position.y + neighborsDirections[i].y + GetComponentInParent<Board>().height) % GetComponentInParent<Board>().height);
                 if (GetComponentInParent<Board>().getCellByCoords(x, y) != null)
                 {
                     neighbors.Add(GetComponentInParent<Board>().getCellByCoords(x, y));
                 }
-                
-
             }
             return neighbors;
         }
-
     }
 }

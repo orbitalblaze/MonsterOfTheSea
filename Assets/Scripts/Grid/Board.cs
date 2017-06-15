@@ -40,7 +40,7 @@ namespace Grid
                 }
                 
                 
-                if (clickedCells[0].isNeighbor(clickedCells[1].position))
+                if (clickedCells[0].isNeighbor(clickedCells[1]))
                 {
                     clickedCells[0].getToken().move(clickedCells[1]);
                 }
@@ -75,7 +75,7 @@ namespace Grid
 
         public Cell getCellByCoords(int x, int y)
         {
-            if (!((x < 0 || x > width) || (y < 0 || y > height)))
+            if (((x >= 0) && (x < width)) && ((y >= 0) && (y < height)))
             {
                 return cells[x, y];
             }

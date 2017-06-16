@@ -73,4 +73,9 @@ public class HexMesh : MonoBehaviour {
 	{
 		transform.parent.GetComponent<Cell>().userClick();
 	}
+
+	private void OnMouseEnter()
+	{
+		transform.parent.GetComponent<Cell>().mouseOver();
+	}
 }

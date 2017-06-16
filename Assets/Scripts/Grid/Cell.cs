@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Grid
 {
-    public class Cell : MonoBehaviour
+    public class Cell : MonoBehaviour, IDropHandler
     {
         public GridPosition position;
 
@@ -80,12 +81,25 @@ namespace Grid
                 GridPosition neighborPos = new GridPosition();
                 int x = (int) (position.x + neighborsDirections[i].x);
                 int y = (int) ((position.y + neighborsDirections[i].y + GetComponentInParent<Board>().height) % GetComponentInParent<Board>().height);
-                if (GetComponentInParent<Board>().getCellByCoords(x, y) != null)
+                if ((GetComponentInParent<Board>().getCellByCoords(x, y) != null) && (GetComponentInParent<Board>().getCellByCoords(x, y).GetComponentInChildren<Card>() == null) && (GetComponentInParent<Board>().getCellByCoords(x, y).GetComponentInChildren<Token>() == null) && (GetComponentInParent<Board>().getCellByCoords(x, y).GetComponentInChildren<Obstacle>() == null))
                 {
                     neighbors.Add(GetComponentInParent<Board>().getCellByCoords(x, y));
                 }
             }
             return neighbors;
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void mouseOver()
+        {
+            if ((GetComponentInChildren<Card>() == null) && (GetComponentInChildren<Token>() == null) && (GetComponentInChildren<Obstacle>() == null))
+            {
+                GetComponentInParent<Board>().mouseOverCell(this);
+            }
         }
     }
 }

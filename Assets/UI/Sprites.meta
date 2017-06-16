@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: f16a95c9464b16f4d99b85e7eb32154d
+folderAsset: yes
+timeCreated: 1496755196
+=======
 guid: 44095415c0d79f0468a040a6e876bf2e
 folderAsset: yes
 timeCreated: 1489598421
+>>>>>>> finalegrid
 licenseType: Free
 DefaultImporter:
   userData: 

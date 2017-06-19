@@ -9,6 +9,7 @@ public class MusicVolume : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		myMusic.volume = Volume.value;
 	}
 }

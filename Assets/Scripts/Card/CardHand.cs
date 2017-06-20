@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class CardHand : MonoBehaviour
@@ -7,34 +6,48 @@ public class CardHand : MonoBehaviour
 	public List<CarteEnMain> hand;
 
 	public CarteEnMain cartePrefab;
+
+	private int lastNumberOfCardInHand;
 	// Use this for initialization
 	void Awake () {
-		
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
-
-		
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
+		hand.Add(Instantiate(cartePrefab));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		for (int i = 0; i < hand.Count; i++)
+		if (lastNumberOfCardInHand != hand.Count)
 		{
-			hand[i].transform.SetParent(transform);
-			hand[i].transform.localPosition = new Vector3(35 + ((478 / hand.Count) * i), 0, 0f);
-			hand[i].transform.localScale = new Vector3(1f, 1f, 1f);
+			foreach (CarteEnMain child in GetComponentsInChildren<CarteEnMain>())
+			{
+				child.transform.SetParent(null);
+			}
+			for (int i = 0; i < hand.Count; i++)
+			{
+				lastNumberOfCardInHand = hand.Count;
+				hand[i].transform.SetParent(transform);
+				hand[i].transform.localPosition = new Vector3(35 + ((478 / hand.Count) * i), 0f, 0f);
+				hand[i].transform.localScale = new Vector3(1f, 1f, 1f);
+			}
 		}
 	}
 
 	public void addCard(Card card)
 	{
-		hand.Add(Instantiate<CarteEnMain>(cartePrefab));
+		CarteEnMain carte = Instantiate(cartePrefab);
+		hand.Add(carte);
+		carte.handID = hand.Count - 1;
+	}
+
+	public void deleteCard(CarteEnMain card)
+	{
+		hand.Remove(card);
 	}
 }

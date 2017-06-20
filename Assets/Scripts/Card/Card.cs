@@ -3,17 +3,25 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-	private bool inDragging = false;
+	private bool inDragging = true;
+	public int number;
+
+	private void Awake()
+	{
+		Board.current.setCurrentDraggingCard(this);
+		
+	}
+
 	private void OnMouseDown()
 	{
 		if (!inDragging)
 		{
-			GetComponentInParent<Cell>().GetComponentInParent<Board>().setCurrentDraggingCard(this);
+			Board.current.setCurrentDraggingCard(this);
 			inDragging = true;
 		}
 		else
 		{
-			GetComponentInParent<Cell>().GetComponentInParent<Board>().setCurrentDraggingCard(null);
+			Board.current.setCurrentDraggingCard(null);
 			inDragging = false;
 		}
 		

@@ -4,7 +4,12 @@ using UnityEngine;
 //Classe d'une cellule du plateau
 public class Stack : MonoBehaviour
 {
-    public CardType[] stack;
+    public Card[] stack;
+
+    private void Awake()
+    {
+        stack = GetComponentsInChildren<Card>();
+    }
     
     
 }

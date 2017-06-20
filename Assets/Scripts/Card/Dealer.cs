@@ -7,13 +7,7 @@ public class Dealer : MonoBehaviour {
 	private Stack discards;
 	
 
-	// Use this for initialization
-	void Start ()
-	{
-		
-	}
-
-	CardType draw()
+	public Card draw()
 	{
 		int cardNumber = 0;
 		for (int i = 0; i < initialDeck.stack.Length; i++)
@@ -32,11 +26,6 @@ public class Dealer : MonoBehaviour {
 			} 
 		}
 		return null;
-	}
-
-	void discard(CardType card)
-	{
-		discards.stack.SetValue(card, discards.stack.Length);
 	}
 	
 }

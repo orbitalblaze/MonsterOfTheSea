@@ -5,6 +5,8 @@ namespace Grid
 {
     public class Board : MonoBehaviour
     {
+        public static Board current;
+        
         private Cell[,] cells;
         public int width = 19;
         public int height = 10;
@@ -19,6 +21,7 @@ namespace Grid
 
         void Awake()
         {
+            current = this;
             GridPosition[] icebergs = new GridPosition[30];
             icebergs[0] = new GridPosition(1, 1);
             icebergs[1] = new GridPosition(1, 9);

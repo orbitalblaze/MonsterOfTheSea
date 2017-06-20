@@ -10,19 +10,19 @@ public class Dealer : MonoBehaviour {
 	public Card draw()
 	{
 		int cardNumber = 0;
-		for (int i = 0; i < initialDeck.stack.Length; i++)
+		for (int i = 0; i < initialDeck.GetStack().Length; i++)
 		{
-			cardNumber += initialDeck.stack[i].number;
+			cardNumber += initialDeck.GetStack()[i].number;
 		}
 		
 		int cardId = Random.Range(0, cardNumber - 1);
 		
-		for (int i = 0; i < initialDeck.stack.Length; i++)
+		for (int i = 0; i < initialDeck.GetStack().Length; i++)
 		{
-			cardId -= initialDeck.stack[i].number;
+			cardId -= initialDeck.GetStack()[i].number;
 			if (cardId <= 0)
 			{
-				return initialDeck.stack[i];
+				return initialDeck.GetStack()[i];
 			} 
 		}
 		return null;

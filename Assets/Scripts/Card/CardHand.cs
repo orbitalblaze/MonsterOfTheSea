@@ -42,8 +42,9 @@ public class CardHand : MonoBehaviour
 	public void addCard(Card card)
 	{
 		CarteEnMain carte = Instantiate(cartePrefab);
+		carte.init(card);
 		hand.Add(carte);
-		carte.handID = hand.Count - 1;
+		//carte.handID = hand.Count - 1;
 	}
 
 	public void deleteCard(CarteEnMain card)

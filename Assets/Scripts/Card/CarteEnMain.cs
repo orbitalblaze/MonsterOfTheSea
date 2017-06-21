@@ -16,15 +16,14 @@ public class CarteEnMain : MonoBehaviour
 	private void OnClick()
 	{
 		Board board = Board.current;
-		print(board);
+		GetComponentInParent<CardHand>().RemoveCard(card);
 		card = Instantiate(card);
 		card.move(board.getCellByCoords(0, 0));
-		GetComponentInParent<CardHand>().deleteCard(this);
 	}
 
 	public void SetCard(Card initCard)
 	{
 		card = initCard;
-		//GetComponent<Image>().sprite = card.GetComponentInChildren<SpriteRenderer>().sprite;
+		GetComponent<Image>().sprite = card.GetComponentInChildren<SpriteRenderer>().sprite;
 	}
 }

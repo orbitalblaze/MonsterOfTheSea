@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class CardHand : MonoBehaviour
 {
-	public List<CarteEnMain> hand;
+	public List<Card> hand;
 
 	public CarteEnMain cartePrefab;
 
@@ -11,45 +11,43 @@ public class CardHand : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-		for (int i = 0; i < 3; i++)
-		{
-			addCard(Dealer.current.Draw("appelNature"));
-		}
-		for (int i = 0; i < 3; i++)
-		{
-			addCard(Dealer.current.Draw("lienBestial"));
-		}
+		Dealer.current.Deal(2, "appelNature", this);
+		Dealer.current.Deal(2, "lienBestial", this);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (lastNumberOfCardInHand != hand.Count)
-		{
-			foreach (CarteEnMain child in GetComponentsInChildren<CarteEnMain>())
+		{	
+			lastNumberOfCardInHand = hand.Count;
+			
+			foreach (var child in GetComponentsInChildren<CarteEnMain>())
 			{
-				child.transform.SetParent(null);
+				Destroy(child.gameObject);
 			}
+			
 			for (int i = 0; i < hand.Count; i++)
 			{
-				lastNumberOfCardInHand = hand.Count;
-				hand[i].transform.SetParent(transform);
-				hand[i].transform.localPosition = new Vector3(35 + ((478 / hand.Count) * i), 0f, 0f);
-				hand[i].transform.localScale = new Vector3(1f, 1f, 1f);
+				CarteEnMain uiCard = Instantiate(cartePrefab);
+				uiCard.SetCard(hand[i]);
+				uiCard.transform.SetParent(transform);
+				uiCard.transform.localPosition = new Vector3(35 + 478 / hand.Count * i, 0f, 0f);
+				uiCard.transform.localScale = new Vector3(1f, 1f, 1f);
 			}
 		}
 	}
 
-	public void addCard(Card card)
-	{
-		
-		CarteEnMain carte = Instantiate(cartePrefab);
-		carte.SetCard(card);
-		hand.Add(carte);
-		//carte.handID = hand.Count - 1;
-	}
 
-	public void deleteCard(CarteEnMain card)
+	public void RemoveCard(Card card)
 	{
 		hand.Remove(card);
+	}
+
+	public void AddCardInHand(Card[] drawed)
+	{
+		foreach (var card in drawed)
+		{
+			hand.Add(card);
+		}
 	}
 }

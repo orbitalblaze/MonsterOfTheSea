@@ -65,7 +65,7 @@ namespace Grid
             }
             foreach (GridPosition obstPos in icebergs)
             {
-                Obstacle iceberg = Instantiate<Obstacle>(icebergPrefab);
+                Obstacle iceberg = Instantiate(icebergPrefab);
                 iceberg.SetParentCell(getCellByCoords(obstPos.x, obstPos.y));
             }
         }

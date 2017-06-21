@@ -1,31 +1,51 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Dealer : MonoBehaviour {
+public class Dealer : MonoBehaviour
+{
+	public static Dealer current;
+	public Deck[] decks;
 
-	public Stack initialDeck;
-	private Stack deck;
-	private Stack discards;
-	
-
-	public Card draw()
+	private void Awake()
 	{
-		int cardNumber = 0;
-		for (int i = 0; i < initialDeck.GetStack().Length; i++)
+		current = this;
+		for (int i = 0; i < decks.Length; i++)
 		{
-			cardNumber += initialDeck.GetStack()[i].number;
+			decks[i] = Instantiate(decks[i]);
+			decks[i].transform.SetParent(transform);
 		}
-		
-		int cardId = Random.Range(0, cardNumber - 1);
-		
-		for (int i = 0; i < initialDeck.GetStack().Length; i++)
+	}
+
+	public Card Draw(String tarDeck)
+	{
+		foreach (Deck deck in decks)
 		{
-			cardId -= initialDeck.GetStack()[i].number;
-			if (cardId <= 0)
+			if (deck.name == tarDeck)
 			{
-				return initialDeck.GetStack()[i];
-			} 
+				print(deck.name);
+				int cardNumber = 0;
+				
+				foreach (var card in deck.GetDeck())
+				{
+					cardNumber += card.number;
+				}
+				
+		
+				int cardIndex = Random.Range(0, cardNumber - 1);
+				
+				foreach (var card in deck.GetDeck())
+				{
+					cardIndex -= card.number;
+					if (cardIndex <= 0)
+					{
+						print("card has been returned");
+						return card;
+					} 
+				}
+				
+			}
 		}
 		return null;
 	}
-	
 }

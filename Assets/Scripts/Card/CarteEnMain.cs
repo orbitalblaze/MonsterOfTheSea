@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class CarteEnMain : MonoBehaviour
 {
 
-	public Card card;
+	private Card card;
 
 	// Use this for initialization
 	void Start () {
-		Button btn = GetComponentInChildren<Button>();
+		var btn = GetComponentInChildren<Button>();
 		btn.onClick.AddListener(OnClick);
 	}
 
@@ -17,12 +17,14 @@ public class CarteEnMain : MonoBehaviour
 	{
 		Board board = Board.current;
 		print(board);
-		card.move(Board.current.getCellByCoords(0, 0));
+		card = Instantiate(card);
+		card.move(board.getCellByCoords(0, 0));
 		GetComponentInParent<CardHand>().deleteCard(this);
 	}
 
-	public void init(Card card)
+	public void SetCard(Card initCard)
 	{
-		this.card = card;
+		card = initCard;
+		//GetComponent<Image>().sprite = card.GetComponentInChildren<SpriteRenderer>().sprite;
 	}
 }

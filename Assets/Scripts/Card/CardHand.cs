@@ -9,16 +9,16 @@ public class CardHand : MonoBehaviour
 
 	private int lastNumberOfCardInHand;
 	// Use this for initialization
-	void Awake () {
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
-		hand.Add(Instantiate(cartePrefab));
+	void Awake ()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			addCard(Dealer.current.Draw("appelNature"));
+		}
+		for (int i = 0; i < 3; i++)
+		{
+			addCard(Dealer.current.Draw("lienBestial"));
+		}
 	}
 	
 	// Update is called once per frame
@@ -41,8 +41,9 @@ public class CardHand : MonoBehaviour
 
 	public void addCard(Card card)
 	{
+		
 		CarteEnMain carte = Instantiate(cartePrefab);
-		carte.init(card);
+		carte.SetCard(card);
 		hand.Add(carte);
 		//carte.handID = hand.Count - 1;
 	}

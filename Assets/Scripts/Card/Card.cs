@@ -9,7 +9,6 @@ public class Card : MonoBehaviour
 	private void Awake()
 	{
 		Board.current.setCurrentDraggingCard(this);
-		
 	}
 
 	private void OnMouseDown()

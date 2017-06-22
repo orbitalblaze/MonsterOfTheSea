@@ -15,6 +15,8 @@ public class Lobby : Photon.PunBehaviour
 	[Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
 	public byte MaxPlayersPerRoom = 4;
 	TypedLobby defaultLobby;
+	public PhotonPlayer[] playersInRoom;
+	public ListPlayers displayPlayers;
 		
 		
 	#endregion
@@ -41,14 +43,13 @@ public class Lobby : Photon.PunBehaviour
 	void Awake()
 	{
 
-		defaultLobby = new TypedLobby ("m", LobbyType.Default);
 		// #NotImportant
 		// Force LogLevel
 		PhotonNetwork.logLevel = Loglevel;
 
 		// #Critical
 		// we don't join the lobby. There is no need to join a lobby to get the list of rooms.
-		PhotonNetwork.autoJoinLobby = true;
+		PhotonNetwork.autoJoinLobby = false;
 			
 			
 		// #Critical
@@ -95,21 +96,9 @@ public class Lobby : Photon.PunBehaviour
 			
 	}
 
-	public RoomInfo[] GetRoomList()
+	public void JoinRoom()
 	{
-		/*RoomInfo[] rooms = PhotonNetwork.GetRoomList ();
-		print("Rooms available");
-		print (rooms.Length);
-		foreach(RoomInfo room in rooms){
-
-			print (room.Name);
-		}
-		return PhotonNetwork.GetRoomList();*/
-		RoomInfo[] rooms = new RoomInfo[3];
-		rooms[0] = new RoomInfo ("Lo", new ExitGames.Client.Photon.Hashtable());
-		rooms[1] = new RoomInfo ("Lol", new ExitGames.Client.Photon.Hashtable());
-		rooms[2] = new RoomInfo ("Lolo", new ExitGames.Client.Photon.Hashtable());
-		return rooms;
+		PhotonNetwork.JoinRandomRoom();
 	}
 		
 			
@@ -122,15 +111,40 @@ public class Lobby : Photon.PunBehaviour
 	{
 		Debug.Log("DemoAnimator/Launcher:OnPhotonRandomJoinFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);");
 		// #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-		PhotonNetwork.CreateRoom(Random.Range(0,25555).ToString(), new RoomOptions() { MaxPlayers = MaxPlayersPerRoom }, defaultLobby);
+		PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = MaxPlayersPerRoom }, null);
 	}
 		
 	public override void OnJoinedRoom()
 	{
+		ListPlayers ();
 		Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-		GetRoomList ();
 	}
+
+	public override void OnPhotonRandomJoinFailed (object[] codeAndMsg)
+	{
+		Debug.Log("DemoAnimator/Launcher:OnPhotonRandomJoinFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);");
 		
+		// #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
+		PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = MaxPlayersPerRoom }, null);
+	}
+
+	public override void OnPhotonPlayerConnected( PhotonPlayer other)
+	{
+		ListPlayers ();
+		Debug.Log( "OnPhotonPlayerConnected() " + other.name ); // not seen if you're the player connecting
+	}
+	
+	public void ListPlayers()
+	{
+		playersInRoom = PhotonNetwork.playerList;
+		displayPlayers.showPlayers (playersInRoom);
+	}
+
+	public void LeaveRoom()
+	{
+		PhotonNetwork.LeaveRoom();
+	}
+
 		
 	#endregion
 		

@@ -106,11 +106,11 @@ namespace Grid
 
         private Cell createCell(int x, int y)
         {
-            Cell createdCell = Instantiate<Cell>(cellPrefab);
+            Cell createdCell = Instantiate(cellPrefab);
             
             Vector3 cellPos = new Vector3();
             cellPos.x = x * (1.5f * HexMetrics.outerRadius);
-            cellPos.y =  ((y % 10) * (2 * HexMetrics.innerRadius)) + (x % 2) * HexMetrics.innerRadius;
+            cellPos.y =  y % 10 * (2 * HexMetrics.innerRadius) + x % 2 * HexMetrics.innerRadius;
             cellPos.z = 0f;
             createdCell.transform.SetParent(transform, false);
             createdCell.transform.localPosition = cellPos;
@@ -122,14 +122,11 @@ namespace Grid
 
         public Cell getCellByCoords(int x, int y)
         {
-            if (((x >= 0) && (x < width)) && ((y >= 0) && (y < height)))
+            if (x >= 0 && x < width && y >= 0 && y < height)
             {
                 return cells[x, y];
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
         
         public void newSelectedCell(Cell clickedCell)
@@ -149,7 +146,7 @@ namespace Grid
 
         public void setCurrentDraggingCard(Card card)
         {
-            this.currentDraggingCard = card;
+            currentDraggingCard = card;
         }
 
         public void mouseOverCell(Cell cell)

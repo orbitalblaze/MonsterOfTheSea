@@ -7,6 +7,8 @@ public class Card : MonoBehaviour
 	public int number;
 	public bool onBoard = true;
 
+	public CardBehaviour behavior;
+
 	public void DragOnBoard()
 	{
 		if (!inDragging)

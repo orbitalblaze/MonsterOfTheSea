@@ -2,23 +2,19 @@
 using Grid;
 using UnityEngine;
 
-public interface MovingCardBehavior
+public class MovingCardBehavior : CardBehaviour
 {
-    int MoveNbs { get; set; }
-    bool[] Directions { get; set; }
-    void Effect();
-}
-
-public class CardBehaviorScript : MonoBehaviour, MovingCardBehavior
-{
-    public int MoveNbs { get; set; }
-    public bool[] Directions { get; set; }
+    public int MoveNbs;
+    public bool[] Directions;
 
     public void Effect()
     {
         Card parentCard = GetComponentInParent<Card>();
         Cell parentCell = parentCard.GetComponentInParent<Cell>();
         List<Cell> neighbors = parentCell.getNeighbors();
+        
+        neighbors[0].GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.blue);
+        
         
     }
 }

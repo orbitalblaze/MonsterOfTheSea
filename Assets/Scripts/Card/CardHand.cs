@@ -11,8 +11,8 @@ public class CardHand : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Dealer.current.Deal(2, "appelNature", this);
-		Dealer.current.Deal(2, "lienBestial", this);
+		Dealer.current.Deal(3, "lienBestial", this);
+		Dealer.current.Deal(3, "deplacement", this);
 	}
 	
 	// Update is called once per frame

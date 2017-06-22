@@ -7,7 +7,6 @@ public class Card : MonoBehaviour
 	public int number;
 	public bool onBoard = true;
 
-	public CardBehaviour behavior;
 
 	public void DragOnBoard()
 	{
@@ -23,6 +22,7 @@ public class Card : MonoBehaviour
 		if (inDragging) {
 			Board.current.setCurrentDraggingCard (null);
 			inDragging = false;
+			
 		}
 	}
 	

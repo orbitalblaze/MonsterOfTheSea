@@ -1,15 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : Photon.PunBehaviour{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public Color color;
+	public Token token;
+	public string name;
 }

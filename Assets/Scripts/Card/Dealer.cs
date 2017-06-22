@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class Dealer : MonoBehaviour
 {
-    public static Dealer current;
+	public static Dealer current;
     public Deck[] decks;
 
     private void Awake()

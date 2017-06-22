@@ -10,6 +10,7 @@ namespace Grid
         private Cell[,] cells;
         public int width = 19;
         public int height = 10;
+		public bool hovered = false;
 
         public Cell cellPrefab;
         
@@ -97,6 +98,11 @@ namespace Grid
                 }
             }
         }
+
+		void OnMouseOver()
+		{
+			print ("Hover");
+		}
 
         private Cell createCell(int x, int y)
         {

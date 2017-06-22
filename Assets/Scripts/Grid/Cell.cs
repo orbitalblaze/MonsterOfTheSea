@@ -98,8 +98,10 @@ namespace Grid
         {
             if ((GetComponentInChildren<Card>() == null) && (GetComponentInChildren<Token>() == null) && (GetComponentInChildren<Obstacle>() == null))
             {
+				print("move over me");
                 GetComponentInParent<Board>().mouseOverCell(this);
             }
         }
+		
     }
 }

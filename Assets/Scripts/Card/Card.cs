@@ -3,32 +3,30 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-	private bool inDragging = true;
+	private bool inDragging = false;
 	public int number;
+	public bool onBoard = true;
 
-	private void Awake()
-	{
-		Board.current.setCurrentDraggingCard(this);
-	}
-
-	private void OnMouseDown()
+	public void DragOnBoard()
 	{
 		if (!inDragging)
 		{
 			Board.current.setCurrentDraggingCard(this);
 			inDragging = true;
 		}
-		else
-		{
-			Board.current.setCurrentDraggingCard(null);
+	}
+
+	public void StopDragOnBoard()
+	{
+		if (inDragging) {
+			Board.current.setCurrentDraggingCard (null);
 			inDragging = false;
 		}
-		
 	}
 	
 	public void move(Cell target)
 	{
 		transform.SetParent(target.transform);
-		transform.localPosition = new Vector3(0f, 0f, 0f);
+		transform.localPosition = new Vector3(0f,0f,-1f);
 	}
 }

@@ -9,7 +9,7 @@ public class CardHand : MonoBehaviour
 
 	private int lastNumberOfCardInHand;
 	// Use this for initialization
-	void Awake ()
+	void Start ()
 	{
 		Dealer.current.Deal(2, "appelNature", this);
 		Dealer.current.Deal(2, "lienBestial", this);

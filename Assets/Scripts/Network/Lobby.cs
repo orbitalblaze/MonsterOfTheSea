@@ -61,13 +61,20 @@ public class Lobby : Photon.PunBehaviour
 	{
 		Connect ();
 	}
-		
+
+	void Update()
+	{
+		if(PhotonNetwork.isMasterClient && PhotonNetwork.room.PlayerCount == PhotonNetwork.room.MaxPlayers)
+		{
+			print ("lel");
+			LetUsStartTheGame();
+		}
+	}
 			
 	#endregion
 		
 		
 	#region Public Methods
-		
 
 	/// <summary>
 	/// Start the connection process. 
@@ -133,6 +140,12 @@ public class Lobby : Photon.PunBehaviour
 		ListPlayers ();
 		Debug.Log( "OnPhotonPlayerConnected() " + other.name ); // not seen if you're the player connecting
 	}
+
+	public override void OnPhotonPlayerDisconnected( PhotonPlayer other)
+	{
+		ListPlayers ();
+		Debug.Log( "OnPhotonPlayerConnected() " + other.name ); // not seen if you're the player connecting
+	}
 	
 	public void ListPlayers()
 	{
@@ -143,6 +156,10 @@ public class Lobby : Photon.PunBehaviour
 	public void LeaveRoom()
 	{
 		PhotonNetwork.LeaveRoom();
+	}
+
+	private void LetUsStartTheGame(){
+		PhotonNetwork.LoadLevel("Net - Game");
 	}
 
 		

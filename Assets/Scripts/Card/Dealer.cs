@@ -1,42 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Dealer : MonoBehaviour {
+public class Dealer : MonoBehaviour
+{
+	public static Dealer current;
+    public Deck[] decks;
 
-	public Stack initialDeck;
-	private Stack deck;
-	private Stack discards;
-	
+    private void Awake()
+    {
+        current = this;
+        for (int i = 0; i < decks.Length; i++)
+        {
+            decks[i] = Instantiate(decks[i]);
+            decks[i].transform.SetParent(transform);
+        }
+    }
 
-	// Use this for initialization
-	void Start ()
-	{
-		
-	}
-
-	CardType draw()
-	{
-		int cardNumber = 0;
-		for (int i = 0; i < initialDeck.stack.Length; i++)
-		{
-			cardNumber += initialDeck.stack[i].number;
-		}
-		
-		int cardId = Random.Range(0, cardNumber - 1);
-		
-		for (int i = 0; i < initialDeck.stack.Length; i++)
-		{
-			cardId -= initialDeck.stack[i].number;
-			if (cardId <= 0)
-			{
-				return initialDeck.stack[i];
-			} 
-		}
-		return null;
-	}
-
-	void discard(CardType card)
-	{
-		discards.stack.SetValue(card, discards.stack.Length);
-	}
-	
+    public void Deal(int nbsCard, String tarDeck, CardHand cardHand)
+    {
+        print("dealing...");
+        foreach (var deck in decks)
+        {
+            if (deck.name == tarDeck + "(Clone)")
+            {
+                Card[] drawed = deck.Deal(nbsCard);
+                cardHand.AddCardInHand(drawed);
+                
+            }
+        }
+    }
 }

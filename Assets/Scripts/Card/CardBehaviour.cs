@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class CardBehaviour : MonoBehaviour {
+public class CardBehaviour : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public GameObject dropTarget;
+	public int actionRange;
+	public GameObject effectApplicationTarget;
+
 }

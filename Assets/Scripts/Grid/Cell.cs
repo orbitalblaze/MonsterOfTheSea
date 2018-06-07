@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 namespace Grid
 {
@@ -101,6 +102,17 @@ namespace Grid
 				print("move over me");
                 GetComponentInParent<Board>().mouseOverCell(this);
             }
+        }
+
+        public Vector2Int distance(Cell target)
+        {
+            return new Vector2Int(target.position.x - this.position.x, target.position.y - this.position.y);
+        }
+
+        public Vector2Int direction (Cell target)
+        {
+            Vector2Int distance = this.distance(target);
+            return new Vector2Int(Math.Sign(distance.x), Math.Sign(distance.y));
         }
 		
     }

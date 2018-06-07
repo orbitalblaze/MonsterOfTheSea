@@ -9,12 +9,13 @@ public class MovingCardBehavior : CardBehaviour
 
     public void Effect()
     {
-        Card parentCard = GetComponentInParent<Card>();
+        Debug.Log("pute");
+
+        /*Card parentCard = GetComponentInParent<Card>();
         Cell parentCell = parentCard.GetComponentInParent<Cell>();
         List<Cell> neighbors = parentCell.getNeighbors();
         
-        neighbors[0].GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.blue);
-        
+        neighbors[0].GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.blue);*/        
         
     }
 }

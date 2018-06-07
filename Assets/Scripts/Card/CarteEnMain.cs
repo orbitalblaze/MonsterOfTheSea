@@ -7,6 +7,7 @@ public class CarteEnMain : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
 
 	public Card card;
+    public Player player;
 	private Vector3 startingPosition;
 
 	// Use this for initialization
@@ -23,17 +24,21 @@ public class CarteEnMain : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	public void OnDrag(PointerEventData data)
 	{
 		transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f);
-
-		if (card.onBoard && Board.current.hovered) {
-			this.GetComponent<Image>().enabled = false;
-			card.DragOnBoard();
-		} 
-		else if(card.onBoard && !Board.current.hovered){
-			this.GetComponent<Image>().enabled = true;
-			card.StopDragOnBoard();
-			card.transform.SetParent(CardInstanceBox.current.transform);
-			card.transform.localPosition = Vector3.zero;
-		}
+        if (card.onBoard)
+        {
+            if (Board.current.hovered)
+            {
+                this.GetComponent<Image>().enabled = false;
+                card.DragOnBoard();
+            }
+            else if (!Board.current.hovered)
+            {
+                this.GetComponent<Image>().enabled = true;
+                card.StopDragOnBoard();
+                card.transform.SetParent(CardInstanceBox.current.transform);
+                card.transform.localPosition = Vector3.zero;
+            }
+        }
 
 	}
 
@@ -43,13 +48,14 @@ public class CarteEnMain : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 			GetComponentInParent<CardHand>().RemoveCard (card);
 			card.StopDragOnBoard();
 		}
-		else if(!card.onBoard && Board.current.hovered){
-
-		}
+		else if(!card.onBoard && Board.current.hovered)
+        {
+            GetComponentInParent<CardHand>().RemoveCard(card);
+            card.GetComponent<MovingCardBehavior>().Effect();
+        }
 		else {
 			transform.position = startingPosition;
 		}
-		
 	}
 
 	/*private void OnClick()

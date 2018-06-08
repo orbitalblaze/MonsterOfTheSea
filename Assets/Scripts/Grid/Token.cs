@@ -6,6 +6,7 @@ public class Token : MonoBehaviour {
     public Vector2Int startPosition;
     public Vector2Int orientation = Vector2Int.up;
     private Transform startParent;
+    public bool movable = false;
 
     public void Update()
     {
@@ -76,5 +77,11 @@ public class Token : MonoBehaviour {
         transform.localPosition = new Vector3(0f, 0f, 0f);
     }
 
-    
+    private void OnMouseDown()
+    {
+        if(movable)
+        {
+
+        }
+    }
 }

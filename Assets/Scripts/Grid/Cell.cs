@@ -32,7 +32,7 @@ namespace Grid
         public void userClick()
         {
             print(position.x + ", " + position.y);
-            GetComponentInParent<Board>().newSelectedCell(this);
+            /*GetComponentInParent<Board>().newSelectedCell(this);*/
         }
 
         public bool hasToken()

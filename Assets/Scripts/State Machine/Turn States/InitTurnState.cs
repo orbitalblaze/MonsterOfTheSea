@@ -8,13 +8,16 @@ namespace Grid
     {
         public override void Enter()
         {
+            Debug.Log("Entering InitTurnState");
             base.Enter();
-            Init();
+            StartCoroutine(Init());
         }
 
-        void Init()
+        IEnumerator Init()
         {
             SpawnTokenPlayer();
+            DealCards();
+            yield return null;
             owner.ChangeState<WhaleDrawing>();
         }
 
@@ -29,6 +32,11 @@ namespace Grid
                 GameObject token = Instantiate(player.token.gameObject,
                     board.getCellByCoords(player.token.startPosition.x, player.token.startPosition.y).transform);
             }*/
+        }
+
+        void DealCards ()
+        {
+
         }
     }
 }

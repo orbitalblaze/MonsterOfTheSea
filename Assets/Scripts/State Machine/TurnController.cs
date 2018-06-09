@@ -10,6 +10,8 @@ namespace Grid
         public Board board;
         public Token whaleToken;
         public Token hunterToken;
+        public Canvas drawChoiceScreen;
+        public Dealer dealer;
 
         void Start()
         {

@@ -8,13 +8,14 @@ namespace Grid
     {
         public override void Enter()
         {
-            base.Enter();
+            Debug.Log("Entering WhaleDrawing");
             DrawWhale();
         }
 
         void DrawWhale()
         {
-
+            Debug.Log("pute1");
+            drawChoiceScreen.gameObject.SetActive(true);
         }
         
     }

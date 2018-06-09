@@ -11,6 +11,8 @@ namespace Grid
         public Board board { get { return owner.board;  } }
         public Token whaleToken { get { return owner.whaleToken; } }
         public Token hunterToken { get { return owner.hunterToken; } }
+        public Canvas drawChoiceScreen { get { return owner.drawChoiceScreen; } }
+        public Dealer dealer { get { return owner.dealer; } }
 
         protected virtual void Awake()
         {
@@ -19,10 +21,13 @@ namespace Grid
 
         protected override void AddListeners ()
         {
+            Debug.Log("Adding Listeners");
+
         }
 
         protected override void RemoveListeners()
         {
+            Debug.Log("Removing Listeners");
         }
     }
 }

@@ -29,6 +29,7 @@ public class StateMachine : MonoBehaviour {
     {
         if (_currentState == value || _inTransition)
             return;
+        Debug.Log("Transition...");
 
         _inTransition = true;
 
@@ -41,5 +42,6 @@ public class StateMachine : MonoBehaviour {
             _currentState.Enter();
 
         _inTransition = false;
+        Debug.Log("Transition ended");
     }
 }

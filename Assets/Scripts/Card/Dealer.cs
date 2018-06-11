@@ -4,7 +4,11 @@ using Random = UnityEngine.Random;
 
 public class Dealer : MonoBehaviour
 {
-	public static Dealer current;
+    //Events of deck
+    public delegate void DeckAction();
+    public static event DeckAction OnDraw;
+
+    public static Dealer current;
     public Deck[] decks;
     //Temporaire : le temps d'avoir un système qui permet d'accèder à l'ensemble des joueurs
     public Player player;
@@ -30,7 +34,6 @@ public class Dealer : MonoBehaviour
             {
                 Card[] drawed = deck.Deal(nbsCard);
                 cardHand.AddCardInHand(drawed);
-                
             }
         }
     }
@@ -45,7 +48,7 @@ public class Dealer : MonoBehaviour
             {
                 Card[] drawed = deck.Deal(nbsCard);
                 targetPlayer.cardHand.AddCardInHand(drawed);
-
+                OnDraw();
             }
         }
     }
@@ -58,7 +61,7 @@ public class Dealer : MonoBehaviour
             {
                 Card[] drawed = deck.Deal(nbsCard);
                 player.cardHand.AddCardInHand(drawed);
-
+                OnDraw();
             }
         }
     }

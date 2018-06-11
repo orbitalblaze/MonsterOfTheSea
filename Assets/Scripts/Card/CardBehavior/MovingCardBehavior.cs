@@ -9,7 +9,7 @@ public class MovingCardBehavior : CardBehaviour
 
     public void Effect()
     {
-        Debug.Log("pute");
+        Debug.Log("Movement Card Effect");
 
         /*Card parentCard = GetComponentInParent<Card>();
         Cell parentCell = parentCard.GetComponentInParent<Cell>();

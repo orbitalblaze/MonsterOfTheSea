@@ -45,11 +45,13 @@ public class CarteEnMain : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	public void OnEndDrag(PointerEventData data)
 	{
 		if (card.onBoard && Board.current.hovered) {
-			GetComponentInParent<CardHand>().RemoveCard (card);
+            card.PlayCard();
+            GetComponentInParent<CardHand>().RemoveCard (card);
 			card.StopDragOnBoard();
 		}
 		else if(!card.onBoard && Board.current.hovered)
         {
+            card.PlayCard();
             GetComponentInParent<CardHand>().RemoveCard(card);
             card.GetComponent<MovingCardBehavior>().Effect();
         }

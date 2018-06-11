@@ -3,7 +3,15 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-	private bool inDragging = false;
+    //Events of card
+    public delegate void CardAction(Object sender, CardType cardType);
+    public static event CardAction OnCardPlay;
+
+    public enum CardType : int { APPEL_NATURE = 0, LIEN_BESTIAL = 1, DEPLACEMENT = 2, ARMEMENT = 3};
+
+
+    public CardType cardType;
+    private bool inDragging = false;
 	public int number;
 	public bool onBoard = true;
 
@@ -25,6 +33,11 @@ public class Card : MonoBehaviour
 			
 		}
 	}
+
+    public void PlayCard()
+    {
+        OnCardPlay(this, cardType);
+    }
 	
 	public void move(Cell target)
 	{

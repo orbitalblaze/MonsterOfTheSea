@@ -6,9 +6,9 @@ using Grid;
 public class TurnController : StateMachine
 {
     public Board board;
-    public Token whaleToken;
-    public Token hunterToken;
+    public GameManager gameManager;
     public Canvas drawChoiceScreen;
+    public Dealer dealer;
 
     void Start()
     {

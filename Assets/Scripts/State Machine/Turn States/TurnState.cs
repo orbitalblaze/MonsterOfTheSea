@@ -8,8 +8,8 @@ public class TurnState : State
 {
     protected TurnController owner;
     public Board board { get { return owner.board;  } }
-    public Token whaleToken { get { return owner.whaleToken; } }
-    public Token hunterToken { get { return owner.hunterToken; } }
+    public GameManager gameManager { get { return owner.gameManager; } }
+    public Dealer dealer { get { return owner.dealer; } }
     public Canvas drawChoiceScreen { get { return owner.drawChoiceScreen; } }
 
     protected virtual void Awake()

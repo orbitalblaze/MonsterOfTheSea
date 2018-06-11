@@ -9,14 +9,13 @@ public class CardHand : MonoBehaviour
 
 	private int lastNumberOfCardInHand;
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
-		Dealer.current.Deal(3, "lienBestial", this);
-		Dealer.current.Deal(3, "deplacement", this);
+        hand = new List<Card>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		if (lastNumberOfCardInHand != hand.Count)
 		{	
 			lastNumberOfCardInHand = hand.Count;
@@ -35,7 +34,7 @@ public class CardHand : MonoBehaviour
 				uiCard.transform.localScale = new Vector3(1f, 1f, 1f);
 			}
 		}
-	}
+	}*/
 
 
 	public void RemoveCard(Card card)
@@ -45,7 +44,7 @@ public class CardHand : MonoBehaviour
 
 	public void AddCardInHand(Card[] drawed)
 	{
-		foreach (var card in drawed)
+		foreach (Card card in drawed)
 		{
 			hand.Add(card);
 		}

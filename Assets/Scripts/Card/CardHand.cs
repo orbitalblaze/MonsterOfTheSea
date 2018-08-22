@@ -5,17 +5,18 @@ public class CardHand : MonoBehaviour
 {
 	public List<Card> hand;
 
-	public CarteEnMain cartePrefab;
+    public List<Card> temp;
 
-	private int lastNumberOfCardInHand;
+    private int lastNumberOfCardInHand;
 	// Use this for initialization
 	void Awake ()
 	{
         hand = new List<Card>();
-	}
-	
-	// Update is called once per frame
-	/*void Update () {
+        temp = new List<Card>();
+    }
+
+    // Update is called once per frame
+    /*void Update () {
 		if (lastNumberOfCardInHand != hand.Count)
 		{	
 			lastNumberOfCardInHand = hand.Count;
@@ -37,7 +38,7 @@ public class CardHand : MonoBehaviour
 	}*/
 
 
-	public void RemoveCard(Card card)
+    public void RemoveCard(Card card)
 	{
 		hand.Remove(card);
 	}

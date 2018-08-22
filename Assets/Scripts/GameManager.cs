@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public Player currentPlayer;
     public int roundNumber = 0 ;
 
+    public delegate void TurnAction();
+    public static event TurnAction OnEndTurn;
+
     private void Awake()
     {
         players = new List<Player>();
@@ -57,13 +60,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void EndTurn()
+    public void EndTurn()
     {
+        OnEndTurn();
         turnOrder.RemoveAt(0);
         if (turnOrder.Count == 0)
             NewRound();
 
         currentPlayer = turnOrder[0];
+        OnEndTurn();
     }
 
     void NewRound()

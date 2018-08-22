@@ -7,6 +7,7 @@ public class TurnController : StateMachine
 {
     public Board board;
     public GameManager gameManager;
+    public Canvas Overlay;
     public Canvas drawChoiceScreen;
     public Dealer dealer;
 

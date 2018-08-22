@@ -3,7 +3,7 @@
 [RequireComponent(typeof(CardHand))]
 public class Player : MonoBehaviour
 {
-    public string name;
+    public new string name;
     public Role role;
     public Token token { get {return role.token; } }
     public CardHand cardHand;

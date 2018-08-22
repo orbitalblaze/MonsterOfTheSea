@@ -10,6 +10,7 @@ public class TurnState : State
     public Board board { get { return owner.board;  } }
     public GameManager gameManager { get { return owner.gameManager; } }
     public Dealer dealer { get { return owner.dealer; } }
+    public Canvas Overlay { get { return owner.Overlay; } }
     public Canvas drawChoiceScreen { get { return owner.drawChoiceScreen; } }
 
     protected virtual void Awake()
@@ -22,6 +23,7 @@ public class TurnState : State
         Debug.Log("Adding Listeners");
         Dealer.OnDraw += OnDraw;
         Card.OnCardPlay += OnCardPlay;
+        GameManager.OnEndTurn += OnEndTurn;
 
     }
 
@@ -30,6 +32,7 @@ public class TurnState : State
         Debug.Log("Removing Listeners");
         Dealer.OnDraw -= OnDraw;
         Card.OnCardPlay -= OnCardPlay;
+        GameManager.OnEndTurn -= OnEndTurn;
     }
 
     protected virtual void OnDraw()
@@ -38,6 +41,11 @@ public class TurnState : State
     }
 
     protected virtual void OnCardPlay(object sender, Card.CardType cardType)
+    {
+
+    }
+
+    protected virtual void OnEndTurn()
     {
 
     }

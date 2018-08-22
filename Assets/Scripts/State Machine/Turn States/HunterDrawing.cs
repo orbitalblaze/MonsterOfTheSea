@@ -1,15 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Grid;
-using System;
 using UnityEngine.UI;
 
-public class WhaleDrawing : TurnState
-{
+public class HunterDrawing : TurnState {
+
     public override void Enter()
     {
-        Debug.Log("Entering WhaleDrawing");
+        Debug.Log("Entering HunterTurn");
         base.Enter();
         changeOverlay();
         drawChoiceScreen.gameObject.SetActive(true);
@@ -25,7 +23,7 @@ public class WhaleDrawing : TurnState
         main.GetComponent<CarteEnMain>().LoadHandUI(gameManager.currentPlayer.cardHand);
     }
 
-    protected override void OnDraw()
+    /*protected override void OnDraw()
     {
         Debug.Log("OnDraw");
         StartCoroutine(EndDraw());
@@ -37,5 +35,5 @@ public class WhaleDrawing : TurnState
         drawChoiceScreen.gameObject.SetActive(false);
         yield return null;
         owner.ChangeState<WhaleTurn>();
-    }
+    } */
 }

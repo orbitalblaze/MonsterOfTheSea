@@ -47,18 +47,15 @@ public class Dealer : MonoBehaviour
     //Faire une surcharge Draw(int nbsCard, String tarDeck) ou alors donner par défaut au joueur actif
     public void Draw(int nbsCard, String targetDeck, Player targetPlayer)
     {
+
         //On cherche aux travers de tout les gameobjects le deck demandé. IT'S A MATCH!
         foreach (var deck in decks)
         {            
             if (deck.name == targetDeck + "(Clone)")
             {
-                //On répète l'opération le nombre de fois demandé
-                for(int i = 0; i<nbsCard; i++)
-                {
-                    Card[] drawed = deck.Deal(nbsCard);
-                    targetPlayer.cardHand.AddCardInHand(drawed);
-                    OnDraw();
-                }
+                Card[] drawed = deck.Deal(nbsCard);
+                targetPlayer.cardHand.AddCardInHand(drawed);
+                OnDraw();
             }
         }
     }

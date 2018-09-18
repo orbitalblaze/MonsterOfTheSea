@@ -8,7 +8,8 @@ public class TurnController : StateMachine
     public Board board;
     public GameManager gameManager;
     public Canvas Overlay;
-    public Canvas drawChoiceScreen;
+    public Canvas drawWhaleChoiceScreen;
+    public Canvas drawHunterChoiceScreen;
     public Dealer dealer;
 
     void Start()

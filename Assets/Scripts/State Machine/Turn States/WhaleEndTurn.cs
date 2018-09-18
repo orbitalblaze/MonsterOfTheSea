@@ -18,7 +18,7 @@ public class WhaleEndTurn : TurnState
     {
         Debug.Log("Changing Turn");
         yield return null;
-        if (gameManager.currentPlayer.role.roleType.Equals(Role.CHASSEUR))
+        if ((int) gameManager.currentPlayer.role.roleType == (int) Role.CHASSEUR)
         {
             owner.ChangeState<HunterDrawing>();
         }

@@ -12,7 +12,7 @@ public class WhaleDrawing : TurnState
         Debug.Log("Entering WhaleDrawing");
         base.Enter();
         changeOverlay();
-        drawChoiceScreen.gameObject.SetActive(true);
+        drawWhaleChoiceScreen.gameObject.SetActive(true);
     }
 
     private void changeOverlay()
@@ -34,7 +34,7 @@ public class WhaleDrawing : TurnState
     IEnumerator EndDraw()
     {
         Debug.Log("EndDraw");
-        drawChoiceScreen.gameObject.SetActive(false);
+        drawWhaleChoiceScreen.gameObject.SetActive(false);
         yield return null;
         owner.ChangeState<WhaleTurn>();
     }

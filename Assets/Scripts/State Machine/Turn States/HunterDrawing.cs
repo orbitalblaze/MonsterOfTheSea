@@ -10,7 +10,22 @@ public class HunterDrawing : TurnState {
         Debug.Log("Entering HunterTurn");
         base.Enter();
         changeOverlay();
-        drawChoiceScreen.gameObject.SetActive(true);
+        
+        //Prepare choice screen for movement cards
+        Button[] choices = drawHunterChoiceScreen.GetComponentsInChildren<Button>();
+        dealer.Reveal(2, "deplacement");
+        for(int i = 0; i < dealer.revealedCards.Count; i++)
+        {
+            Debug.LogWarning("This card is "+dealer.revealedCards[i].name);
+            setCardChoiceButton(choices[i], i);
+        }
+        drawHunterChoiceScreen.gameObject.SetActive(true);
+    }
+
+    private void setCardChoiceButton(Button button, int indexCard)
+    {
+        button.GetComponent<Image>().sprite = dealer.revealedCards[indexCard].GetComponentInChildren<SpriteRenderer>().sprite;
+        button.onClick.AddListener(() => dealer.Pick(indexCard));
     }
 
     private void changeOverlay()
@@ -23,7 +38,7 @@ public class HunterDrawing : TurnState {
         main.GetComponent<CarteEnMain>().LoadHandUI(gameManager.currentPlayer.cardHand);
     }
 
-    /*protected override void OnDraw()
+    protected override void OnDraw()
     {
         Debug.Log("OnDraw");
         StartCoroutine(EndDraw());
@@ -32,8 +47,8 @@ public class HunterDrawing : TurnState {
     IEnumerator EndDraw()
     {
         Debug.Log("EndDraw");
-        drawChoiceScreen.gameObject.SetActive(false);
+        drawHunterChoiceScreen.gameObject.SetActive(false);
         yield return null;
         owner.ChangeState<WhaleTurn>();
-    } */
+    } 
 }

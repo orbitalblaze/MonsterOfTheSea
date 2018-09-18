@@ -11,7 +11,8 @@ public class TurnState : State
     public GameManager gameManager { get { return owner.gameManager; } }
     public Dealer dealer { get { return owner.dealer; } }
     public Canvas Overlay { get { return owner.Overlay; } }
-    public Canvas drawChoiceScreen { get { return owner.drawChoiceScreen; } }
+    public Canvas drawWhaleChoiceScreen { get { return owner.drawWhaleChoiceScreen; } }
+    public Canvas drawHunterChoiceScreen { get { return owner.drawHunterChoiceScreen; } }
 
     protected virtual void Awake()
     {

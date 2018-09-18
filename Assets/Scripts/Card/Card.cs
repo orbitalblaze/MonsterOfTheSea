@@ -12,6 +12,7 @@ public class Card : MonoBehaviour
 
     public CardType cardType;
     private bool inDragging = false;
+    //Supprimer cette variable quand Deck.cardList sera un HashTable
 	public int number;
 	public bool onBoard = true;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
 public class Dealer : MonoBehaviour
@@ -12,9 +13,11 @@ public class Dealer : MonoBehaviour
     public Deck[] decks;
     //Temporaire : le temps d'avoir un système qui permet d'accèder à l'ensemble des joueurs
     public GameManager gameManager;
+    public List<Card> revealedCards;
 
     private void Awake()
     {
+        revealedCards = new List<Card>();
         current = this;
         for (int i = 0; i < decks.Length; i++)
         {
@@ -37,23 +40,20 @@ public class Dealer : MonoBehaviour
             }
             else
             {
-                //Draw(3, "armement", player);
-                Draw(3, "deplacement", player);
+                Draw(3, "armement", player);
+                Draw(2, "deplacement", player);
             }
         }
     }
 
-
-    //Faire une surcharge Draw(int nbsCard, String tarDeck) ou alors donner par défaut au joueur actif
     public void Draw(int nbsCard, String targetDeck, Player targetPlayer)
     {
-
         //On cherche aux travers de tout les gameobjects le deck demandé. IT'S A MATCH!
         foreach (var deck in decks)
         {            
             if (deck.name == targetDeck + "(Clone)")
             {
-                Card[] drawed = deck.Deal(nbsCard);
+                Card[] drawed = deck.Draw(nbsCard);
                 targetPlayer.cardHand.AddCardInHand(drawed);
                 OnDraw();
             }
@@ -66,11 +66,42 @@ public class Dealer : MonoBehaviour
         {
             if (deck.name == targetDeck + "(Clone)")
             {
-                Card[] drawed = deck.Deal(nbsCard);
+                Card[] drawed = deck.Draw(nbsCard);
                 gameManager.currentPlayer.cardHand.AddCardInHand(drawed);
                 OnDraw();
             }
         }
+    }
+
+    public void Discard(Card card)
+    {
+        decks[(int) card.cardType].Discard(card);
+    }
+
+    public void Reveal(int nbsCard, String targetDeck)
+    {
+        foreach (var deck in decks)
+        {
+            if (deck.name == targetDeck + "(Clone)")
+            {
+                Card[] drawed = deck.Draw(nbsCard);
+                foreach (var card in drawed)
+                {
+                    revealedCards.Add(card);
+                }
+            }
+        }
+    }
+
+    public void Pick (int indexCard)
+    {
+        gameManager.currentPlayer.cardHand.AddCardInHand(revealedCards[indexCard]);
+        foreach (var revealedCard in revealedCards)
+        {
+            Discard(revealedCard);
+        }
+        revealedCards.Clear();
+        OnDraw();
     }
 
     public void DrawAppelNature ()

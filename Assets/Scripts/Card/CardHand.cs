@@ -5,14 +5,11 @@ public class CardHand : MonoBehaviour
 {
 	public List<Card> hand;
 
-    public List<Card> temp;
-
     private int lastNumberOfCardInHand;
 	// Use this for initialization
 	void Awake ()
 	{
         hand = new List<Card>();
-        temp = new List<Card>();
     }
 
     // Update is called once per frame
@@ -43,7 +40,12 @@ public class CardHand : MonoBehaviour
 		hand.Remove(card);
 	}
 
-	public void AddCardInHand(Card[] drawed)
+    public void AddCardInHand(Card drawed)
+    {
+        hand.Add(drawed);
+    }
+
+    public void AddCardInHand(Card[] drawed)
 	{
 		foreach (Card card in drawed)
 		{

@@ -33,6 +33,9 @@ public class HunterDrawing : TurnState {
         GameObject avatar = GameObject.Find("Avatar");
         avatar.GetComponent<Image>().sprite = gameManager.currentPlayer.token.gameObject.GetComponent<SpriteRenderer>().sprite;
 
+        GameObject lifeCounter = GameObject.Find("TextPdv");
+        lifeCounter.GetComponent<Text>().text = gameManager.huntersLifePoint.ToString();
+
         GameObject main = GameObject.Find("Main");
         Debug.Log("current player is " + gameManager.currentPlayer.name);
         main.GetComponent<CarteEnMain>().LoadHandUI(gameManager.currentPlayer.cardHand);

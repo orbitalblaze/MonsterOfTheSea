@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public Player currentPlayer;
     public int roundNumber = 0 ;
 
+    public int whaleLifePoint = 20;
+    public int huntersLifePoint = 3;
+
     public delegate void TurnAction();
     public static event TurnAction OnEndTurn;
 

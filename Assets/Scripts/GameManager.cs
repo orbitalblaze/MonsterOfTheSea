@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public void InitGame()
     {
+        //A remplacer par une fonction dynamique
         AddPlayers();
         DealRoles();
         SpawnTokenPlayer();
@@ -39,6 +40,14 @@ public class GameManager : MonoBehaviour
 
         player = Instantiate(PlayerPrefab);
         player.name = "Chasseur1";
+        players.Add(player);
+
+        player = Instantiate(PlayerPrefab);
+        player.name = "Chasseur2";
+        players.Add(player);
+
+        player = Instantiate(PlayerPrefab);
+        player.name = "Chasseur3";
         players.Add(player);
     }
 

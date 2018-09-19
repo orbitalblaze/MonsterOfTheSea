@@ -7,7 +7,7 @@ public class HunterDrawing : TurnState {
 
     public override void Enter()
     {
-        Debug.Log("Entering HunterTurn");
+        Debug.Log("Entering HunterDrawing");
         base.Enter();
         changeOverlay();
         
@@ -49,6 +49,6 @@ public class HunterDrawing : TurnState {
         Debug.Log("EndDraw");
         drawHunterChoiceScreen.gameObject.SetActive(false);
         yield return null;
-        owner.ChangeState<WhaleTurn>();
+        owner.ChangeState<HunterTurn>();
     } 
 }

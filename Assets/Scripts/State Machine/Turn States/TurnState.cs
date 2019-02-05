@@ -25,6 +25,7 @@ public class TurnState : State
         Dealer.OnDraw += OnDraw;
         Card.OnCardPlay += OnCardPlay;
         GameManager.OnEndTurn += OnEndTurn;
+        //InputController.fireEvent += OnFire;
 
     }
 
@@ -34,6 +35,7 @@ public class TurnState : State
         Dealer.OnDraw -= OnDraw;
         Card.OnCardPlay -= OnCardPlay;
         GameManager.OnEndTurn -= OnEndTurn;
+        //InputController.fireEvent -= OnFire;
     }
 
     protected virtual void OnDraw()
@@ -50,4 +52,16 @@ public class TurnState : State
     {
 
     }
+
+    /*protected virtual void OnFire(object sender, InfoEventArgs<int> e)
+    {
+
+    }
+    protected virtual void SelectTile(Point p)
+    {
+        /*if (pos == p || !board.tiles.ContainsKey(p))
+            return;
+        pos = p;
+        tileSelectionIndicator.localPosition = board.tiles[p].center;
+    }*/
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HunterDrawing : TurnState {
+public class HunterDrawingState : TurnState {
 
     public override void Enter()
     {
@@ -52,6 +52,6 @@ public class HunterDrawing : TurnState {
         Debug.Log("EndDraw");
         drawHunterChoiceScreen.gameObject.SetActive(false);
         yield return null;
-        owner.ChangeState<HunterTurn>();
+        owner.ChangeState<HunterTurnState>();
     } 
 }

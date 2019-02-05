@@ -2,7 +2,7 @@
 using Grid;
 using UnityEngine;
 
-public class MovingCardBehavior : CardBehaviour
+public class DeplacementCardBehavior : CardBehaviour
 {
     public int MoveNbs;
     public bool[] Directions;

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
 
 namespace Grid
 {
@@ -33,6 +32,7 @@ namespace Grid
         {
             print(position.x + ", " + position.y);
             /*GetComponentInParent<Board>().newSelectedCell(this);*/
+
         }
 
         public bool hasToken()
@@ -104,16 +104,35 @@ namespace Grid
             }
         }
 
-        public Vector2Int distance(Cell target)
+        public float distanceFrom (Cell target)
         {
-            return new Vector2Int(target.position.x - this.position.x, target.position.y - this.position.y);
+            return offsetDistance(this, target);
         }
 
-        public Vector2Int direction (Cell target)
+        public float offsetDistance(Cell cellA, Cell cellB)
         {
-            Vector2Int distance = this.distance(target);
-            return new Vector2Int(Math.Sign(distance.x), Math.Sign(distance.y));
+            var aCube = offsetOddQToCubeCoord(cellA);
+            var bCube = offsetOddQToCubeCoord(cellB);
+            return cubeDistance(aCube, bCube);
         }
-		
+
+        public Vector3 offsetOddQToCubeCoord(Cell cell)
+        {
+            var x = cell.position.x;
+            var z = cell.position.y - ( cell.position.x - (cell.position.x%2)) / 2;
+            var y = -x - z;
+            return new Vector3(x, y, z);
+        }
+
+        public float cubeDistance (Vector3 a,Vector3 b)
+        {
+            return (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z)) / 2;
+        }
+
+        public /*Vector2Int*/ void direction(Cell target)
+        {
+            //float distance = this.distance(target);
+            //return new Vector2Int(Math.Sign(distance.x), Math.Sign(distance.y));
+        }
     }
 }

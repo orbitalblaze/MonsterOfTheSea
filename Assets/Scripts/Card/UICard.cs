@@ -49,7 +49,7 @@ public class UICard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         {
             card.PlayCard();
             GetComponentInParent<CarteEnMain>().displayedHand.RemoveCard(card);
-            card.GetComponent<MovingCardBehavior>().Effect();
+            card.GetComponent<DeplacementCardBehavior>().Effect();
         }
         else
         {

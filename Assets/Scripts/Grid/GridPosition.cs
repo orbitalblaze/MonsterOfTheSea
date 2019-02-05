@@ -1,4 +1,5 @@
 using System.Security.Permissions;
+using UnityEngine;
 
 namespace Grid
 {
@@ -11,8 +12,5 @@ namespace Grid
             this.x = x;
             this.y = y;
         }
-
-       
-
     }
 }

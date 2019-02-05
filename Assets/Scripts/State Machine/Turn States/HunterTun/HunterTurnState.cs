@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HunterTurn : TurnState {
+public class HunterTurnState : TurnState {
 
     public override void Enter()
     {
@@ -25,6 +25,6 @@ public class HunterTurn : TurnState {
 
     protected override void OnEndTurn()
     {
-        owner.ChangeState<HunterEndTurn>();
+        owner.ChangeState<HunterEndTurnState>();
     }
 }

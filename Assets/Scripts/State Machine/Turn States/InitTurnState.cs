@@ -17,7 +17,7 @@ public class InitTurnState : TurnState
         gameManager.InitGame();
         dealer.Deal();
         yield return null;
-        owner.ChangeState<WhaleDrawing>();
+        owner.ChangeState<WhaleDrawingState>();
     }
 
 }

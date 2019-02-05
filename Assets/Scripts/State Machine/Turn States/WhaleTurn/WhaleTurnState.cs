@@ -24,8 +24,10 @@ public class WhaleTurn : TurnState
         }
     }
 
+
+
     protected override void OnEndTurn()
     {
-        owner.ChangeState<WhaleEndTurn>();
+        owner.ChangeState<WhaleEndTurnState>();
     }
 }

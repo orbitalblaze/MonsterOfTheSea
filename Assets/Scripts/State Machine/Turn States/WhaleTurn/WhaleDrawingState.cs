@@ -5,7 +5,7 @@ using Grid;
 using System;
 using UnityEngine.UI;
 
-public class WhaleDrawing : TurnState
+public class WhaleDrawingState : TurnState
 {
     public override void Enter()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HunterEndTurn : TurnState {
+public class HunterEndTurnState : TurnState {
 
     public override void Enter()
     {
@@ -17,11 +17,11 @@ public class HunterEndTurn : TurnState {
         yield return null;
         if ((int)gameManager.currentPlayer.role.roleType == (int)Role.CHASSEUR)
         {
-            owner.ChangeState<HunterDrawing>();
+            owner.ChangeState<HunterDrawingState>();
         }
         else
         {
-            owner.ChangeState<WhaleDrawing>();
+            owner.ChangeState<WhaleDrawingState>();
         }
     }
 }

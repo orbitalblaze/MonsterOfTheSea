@@ -94,7 +94,7 @@ namespace Grid
                 List<Cell> neighbors = clickedCells[0].getNeighbors();
                 foreach(Cell cell in neighbors)
                 {
-                    cell.GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.red);
+                    cell.GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.green);
                 }
             }
         }
